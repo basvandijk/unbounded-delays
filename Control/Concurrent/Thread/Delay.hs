@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 -- |
 -- Module     : Control.Concurrent.Thread.Delay
--- Copyright  : (c) 2011 Bas van Dijk & Roel van Dijk
+-- Copyright  : 2011 Bas van Dijk & Roel van Dijk
 -- License    : BSD3 (see the file LICENSE)
 -- Maintainer : Bas van Dijk <v.dijk.bas@gmail.com>
 --            , Roel van Dijk <vandijk.roel@gmail.com>
