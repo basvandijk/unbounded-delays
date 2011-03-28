@@ -48,7 +48,7 @@ import System.IO                ( hGetBuf, hPutBuf, hWaitForInput )
 import qualified System.Timeout ( timeout )
 #endif
 
--- from concurrent-extra (this package):
+-- from unbounded-delays (this package):
 import Control.Concurrent.Thread.Delay ( delay )
 
 
