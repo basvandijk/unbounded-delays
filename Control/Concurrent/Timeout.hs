@@ -27,7 +27,7 @@ import Control.Concurrent       ( forkIO, myThreadId, throwTo, killThread )
 import Control.Exception        ( Exception, bracket, handleJust )
 import Control.Monad            ( return, (>>) )
 import Data.Bool                ( otherwise )
-import Data.Eq                  ( Eq )
+import Data.Eq                  ( Eq, (==) )
 import Data.Functor             ( fmap )
 import Data.Maybe               ( Maybe(Nothing, Just) )
 import Data.Ord                 ( (<) )
@@ -47,9 +47,6 @@ import Data.Int                 ( Int )
 import System.IO                ( hGetBuf, hPutBuf, hWaitForInput )
 import qualified System.Timeout ( timeout )
 #endif
-
--- from base-unicode-symbols:
-import Data.Eq.Unicode          ( (≡) )
 
 -- from concurrent-extra (this package):
 import Control.Concurrent.Thread.Delay ( delay )
@@ -106,11 +103,11 @@ standard socket I\/O or file I\/O using this combinator.
 timeout ∷ Integer → IO α → IO (Maybe α)
 timeout n f
     | n < 0     = fmap Just f
-    | n ≡ 0     = return Nothing
+    | n == 0    = return Nothing
     | otherwise = do
         pid ← myThreadId
         ex  ← fmap Timeout newUnique
-        handleJust (\e → if e ≡ ex then Just () else Nothing)
+        handleJust (\e → if e == ex then Just () else Nothing)
                    (\_ → return Nothing)
                    (bracket (forkIO (delay n >> throwTo pid ex))
                             (killThread)

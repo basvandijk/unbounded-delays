@@ -21,6 +21,7 @@ module Control.Concurrent.Thread.Delay ( delay ) where
 -- from base:
 import Control.Concurrent ( threadDelay )
 import Control.Monad      ( when )
+import Data.Eq            ( (/=) )
 import Data.Function      ( ($) )
 import Data.Int           ( Int )
 import Data.Ord           ( min )
@@ -30,9 +31,6 @@ import System.IO          ( IO )
 #if __GLASGOW_HASKELL__ < 700
 import Control.Monad      ( (>>) )
 #endif
-
--- from base-unicode-symbols:
-import Data.Eq.Unicode    ( (≢) )
 
 
 -------------------------------------------------------------------------------
@@ -52,7 +50,7 @@ delay ∷ Integer → IO ()
 delay time = do
   let maxWait = min time $ toInteger (maxBound ∷ Int)
   threadDelay $ fromInteger maxWait
-  when (maxWait ≢ time) $ delay (time - maxWait)
+  when (maxWait /= time) $ delay (time - maxWait)
 
 
 -- The End ---------------------------------------------------------------------
