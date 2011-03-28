@@ -10,13 +10,11 @@ copyright:     (c) 2011 Bas van Dijk & Roel van Dijk
 license:       BSD3
 license-file:  LICENSE
 category:      Concurrency
-synopsis:      Arbitrarily long thread delays and timeouts
-description:
-  This package provides:
-  .
-  * @Thread.Delay@: Arbitrarily long thread delays.
-  .
-  * @Timeout@: Wait arbitrarily long for an IO computation to finish.
+synopsis:      Unbounded thread delays and timeouts
+description:   The @threadDelay@ and @timeout@ functions from the @base@ library
+               use the bounded @Int@ type for specifying the delay or timeout
+               period. This packages provides alternatives which use the
+               unbounded @Integer@ type.
   
 source-repository head
   Type: darcs
