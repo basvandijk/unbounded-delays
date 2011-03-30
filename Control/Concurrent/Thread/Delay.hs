@@ -38,7 +38,7 @@ import Control.Monad      ( (>>) )
 -------------------------------------------------------------------------------
 
 {-|
-Like 'threadDelay', but not bounded by an 'Int'.
+Like @Control.Concurrent.'threadDelay'@, but not bounded by an 'Int'.
 
 Suspends the current thread for a given number of microseconds (GHC only).
 

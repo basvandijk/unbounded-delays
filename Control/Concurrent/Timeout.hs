@@ -70,7 +70,7 @@ instance Show Timeout where
 instance Exception Timeout
 
 {-|
-Like 'System.Timeout.timeout', but not bounded by an 'Int'.
+Like @System.Timeout.'System.Timeout.timeout'@, but not bounded by an 'Int'.
 
 Wrap an 'IO' computation to time out and return 'Nothing' in case no result is
 available within @n@ microseconds (@1\/10^6@ seconds). In case a result is
