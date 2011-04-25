@@ -17,6 +17,8 @@ description:   The @threadDelay@ and @timeout@ functions from the @base@ library
                period. This packages provides alternatives which use the
                unbounded @Integer@ type.
 
+extra-source-files: README.markdown
+
 source-repository head
   Type: git
   Location: git://github.com/basvandijk/unbounded-delays.git
