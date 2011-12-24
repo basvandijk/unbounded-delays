@@ -51,6 +51,3 @@ delay time = do
   let maxWait = min time $ toInteger (maxBound ∷ Int)
   threadDelay $ fromInteger maxWait
   when (maxWait /= time) $ delay (time - maxWait)
-
-
--- The End ---------------------------------------------------------------------
