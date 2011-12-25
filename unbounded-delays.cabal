@@ -1,5 +1,5 @@
 name:          unbounded-delays
-version:       0.1.0.3
+version:       0.1.0.4
 cabal-version: >= 1.6
 build-type:    Custom
 author:        Bas van Dijk <v.dijk.bas@gmail.com>
