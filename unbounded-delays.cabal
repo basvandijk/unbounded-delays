@@ -1,5 +1,5 @@
 name:          unbounded-delays
-version:       0.1.0.5
+version:       0.1.0.6
 cabal-version: >= 1.6
 build-type:    Custom
 author:        Bas van Dijk <v.dijk.bas@gmail.com>
@@ -25,7 +25,7 @@ source-repository head
   Location: git://github.com/basvandijk/unbounded-delays.git
 
 library
-  build-depends: base >= 4 && < 4.7
+  build-depends: base >= 4 && < 4.8
   exposed-modules: Control.Concurrent.Thread.Delay
                  , Control.Concurrent.Timeout
   ghc-options: -Wall
