@@ -1,8 +1,7 @@
 {-# LANGUAGE CPP
            , DeriveDataTypeable
            , NoImplicitPrelude
-           , UnicodeSyntax
-  #-}
+           , UnicodeSyntax #-}
 
 #if __GLASGOW_HASKELL__ >= 704
 {-# LANGUAGE Safe #-}
