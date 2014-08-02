@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, NoImplicitPrelude, UnicodeSyntax #-}
+{-# LANGUAGE CPP, NoImplicitPrelude #-}
 
 #if __GLASGOW_HASKELL__ >= 704
 {-# LANGUAGE Safe #-}
@@ -50,12 +50,12 @@ There is no guarantee that the thread will be rescheduled promptly when the
 delay has expired, but the thread will never continue to run earlier than
 specified.
 -}
-delay ∷ Integer → IO ()
+delay :: Integer -> IO ()
 delay time | time <= 0 =
   -- When time is a big negative integer, casting it to Int may overflow.
   -- So we handle it as a special case here.
   return ()
 delay time = do
-  let maxWait = min time $ toInteger (maxBound ∷ Int)
+  let maxWait = min time $ toInteger (maxBound :: Int)
   threadDelay $ fromInteger maxWait
   when (maxWait /= time) $ delay (time - maxWait)

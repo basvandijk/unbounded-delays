@@ -1,7 +1,4 @@
-{-# LANGUAGE CPP
-           , DeriveDataTypeable
-           , NoImplicitPrelude
-           , UnicodeSyntax #-}
+{-# LANGUAGE CPP, DeriveDataTypeable, NoImplicitPrelude #-}
 
 #if __GLASGOW_HASKELL__ >= 704
 {-# LANGUAGE Safe #-}
@@ -102,16 +99,16 @@ they really don't because the runtime system uses scheduling mechanisms like
 @select(2)@ to perform asynchronous I\/O, so it is possible to interrupt
 standard socket I\/O or file I\/O using this combinator.
 -}
-timeout ∷ Integer → IO α → IO (Maybe α)
+timeout :: Integer -> IO α -> IO (Maybe α)
 timeout n f
     | n < 0     = fmap Just f
     | n == 0    = return Nothing
     | otherwise = do
-        pid ← myThreadId
-        ex  ← fmap Timeout newUnique
-        handleJust (\e → if e == ex then Just () else Nothing)
-                   (\_ → return Nothing)
+        pid <- myThreadId
+        ex  <- fmap Timeout newUnique
+        handleJust (\e -> if e == ex then Just () else Nothing)
+                   (\_ -> return Nothing)
                    (bracket (forkIO (delay n >> throwTo pid ex))
                             (killThread)
-                            (\_ → fmap Just f)
+                            (\_ -> fmap Just f)
                    )
