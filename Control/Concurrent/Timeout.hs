@@ -23,7 +23,7 @@ module Control.Concurrent.Timeout ( timeout ) where
 -------------------------------------------------------------------------------
 
 -- from base:
-import Control.Concurrent       ( forkIO, myThreadId, throwTo, killThread )
+import Control.Concurrent       ( forkIOWithUnmask, myThreadId, throwTo, killThread )
 import Control.Exception        ( Exception, bracket, handleJust )
 import Control.Monad            ( return, (>>), fmap )
 import Data.Bool                ( otherwise )
@@ -108,7 +108,7 @@ timeout n f
         ex  <- fmap Timeout newUnique
         handleJust (\e -> if e == ex then Just () else Nothing)
                    (\_ -> return Nothing)
-                   (bracket (forkIO (delay n >> throwTo pid ex))
+                   (bracket (forkIOWithUnmask (\unmask -> unmask (delay n >> throwTo pid ex)))
                             (killThread)
                             (\_ -> fmap Just f)
                    )
