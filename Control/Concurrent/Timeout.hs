@@ -15,7 +15,7 @@
 -- Wait arbitrarily long for an IO computation to finish.
 -------------------------------------------------------------------------------
 
-module Control.Concurrent.Timeout ( timeout ) where
+module Control.Concurrent.Timeout ( Timeout, timeout ) where
 
 
 -------------------------------------------------------------------------------
@@ -26,8 +26,9 @@ module Control.Concurrent.Timeout ( timeout ) where
 import Control.Concurrent       ( forkIOWithUnmask, myThreadId, throwTo, killThread )
 import Control.Exception        ( Exception, bracket, handleJust )
 import Control.Monad            ( return, (>>), fmap )
-import Data.Bool                ( otherwise )
+import Data.Bool                ( Bool(False), otherwise )
 import Data.Eq                  ( Eq, (==) )
+import Data.Function            ( (.), const)
 import Data.Maybe               ( Maybe(Nothing, Just) )
 import Data.Ord                 ( (<) )
 import Data.Typeable            ( Typeable )
@@ -71,13 +72,17 @@ instance Exception Timeout
 
 {-|
 Like @System.Timeout.'System.Timeout.timeout'@, but not bounded by an 'Int'.
-
+(..)
 Wrap an 'IO' computation to time out and return 'Nothing' in case no result is
 available within @n@ microseconds (@1\/10^6@ seconds). In case a result is
 available before the timeout expires, 'Just' @a@ is returned. A negative timeout
 interval means \"wait indefinitely\".
 
-The design of this combinator was guided by the objective that @timeout n f@
+If the computation has not terminated after @n@ microseconds, it is interrupted
+by an asynchronous exception. The function passed to @f@ can be used to detect
+whether it was interrupted by this timeout or some other exception.
+
+The design of this combinator was guided by the objective that @timeout n (const f)@
 should behave exactly the same as @f@ as long as @f@ doesn't time out. This
 means that @f@ has the same 'myThreadId' it would have without the timeout
 wrapper. Any exceptions @f@ might throw cancel the timeout and propagate further
@@ -99,9 +104,9 @@ they really don't because the runtime system uses scheduling mechanisms like
 @select(2)@ to perform asynchronous I\/O, so it is possible to interrupt
 standard socket I\/O or file I\/O using this combinator.
 -}
-timeout :: Integer -> IO α -> IO (Maybe α)
-timeout n f
-    | n < 0     = fmap Just f
+timeoutWithPred :: Integer -> ((Timeout -> Bool) -> IO α) -> IO (Maybe α)
+timeoutWithPred n f
+    | n < 0     = fmap Just (f (const False))
     | n == 0    = return Nothing
     | otherwise = do
         pid <- myThreadId
@@ -110,5 +115,11 @@ timeout n f
                    (\_ -> return Nothing)
                    (bracket (forkIOWithUnmask (\unmask -> unmask (delay n >> throwTo pid ex)))
                             (killThread)
-                            (\_ -> fmap Just f)
+                            (\_ -> fmap Just (f (==ex)))
                    )
+
+{-|
+Like 'timeoutWithPred', but does not expose the 'Timeout' exception to the called action.
+-}
+timeout :: Integer -> IO α -> IO (Maybe α)
+timeout n = timeoutWithPred n . const
