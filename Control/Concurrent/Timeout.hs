@@ -42,7 +42,7 @@ import Prelude                  ( fromInteger )
 import Control.Monad            ( (>>=), fail )
 #endif
 
-#ifdef __HADDOCK__
+#ifdef __HADDOCK_VERSION__
 import Data.Int                 ( Int )
 import System.IO                ( hGetBuf, hPutBuf, hWaitForInput )
 import qualified System.Timeout ( timeout )
