@@ -15,7 +15,7 @@
 -- Wait arbitrarily long for an IO computation to finish.
 -------------------------------------------------------------------------------
 
-module Control.Concurrent.Timeout ( Timeout, timeout ) where
+module Control.Concurrent.Timeout ( timeout, Timeout, timeoutWithPred ) where
 
 
 -------------------------------------------------------------------------------
