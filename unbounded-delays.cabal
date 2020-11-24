@@ -25,6 +25,7 @@ source-repository head
   Location: git://github.com/basvandijk/unbounded-delays.git
 
 library
+  default-language: Haskell98
   build-depends: base >= 4.4 && < 5
   exposed-modules: Control.Concurrent.Thread.Delay
                  , Control.Concurrent.Timeout
