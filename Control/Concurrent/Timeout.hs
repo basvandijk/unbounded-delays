@@ -4,17 +4,7 @@
 {-# LANGUAGE Safe #-}
 #endif
 
--------------------------------------------------------------------------------
--- |
--- Module     : Control.Concurrent.Timeout
--- Copyright  : 2011 Bas van Dijk & Roel van Dijk
--- License    : BSD3 (see the file LICENSE)
--- Maintainer : Bas van Dijk <v.dijk.bas@gmail.com>
---            , Roel van Dijk <vandijk.roel@gmail.com>
---
--- Wait arbitrarily long for an IO computation to finish.
--------------------------------------------------------------------------------
-
+-- | Wait arbitrarily long for an IO computation to finish.
 module Control.Concurrent.Timeout ( timeout, Timeout, timeoutWithPred ) where
 
 

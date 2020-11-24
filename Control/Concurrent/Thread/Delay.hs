@@ -4,17 +4,7 @@
 {-# LANGUAGE Safe #-}
 #endif
 
--------------------------------------------------------------------------------
--- |
--- Module     : Control.Concurrent.Thread.Delay
--- Copyright  : 2011 Bas van Dijk & Roel van Dijk
--- License    : BSD3 (see the file LICENSE)
--- Maintainer : Bas van Dijk <v.dijk.bas@gmail.com>
---            , Roel van Dijk <vandijk.roel@gmail.com>
---
--- Arbitrarily long thread delays.
--------------------------------------------------------------------------------
-
+-- | Arbitrarily long thread delays.
 module Control.Concurrent.Thread.Delay ( delay ) where
 
 

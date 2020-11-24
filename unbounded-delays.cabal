@@ -1,12 +1,12 @@
 name:          unbounded-delays
-version:       0.1.1.0
+version:       0.1.1.1
 cabal-version: >= 1.6
 build-type:    Simple
 author:        Bas van Dijk <v.dijk.bas@gmail.com>
-               Roel van Dijk <vandijk.roel@gmail.com>
+               Roel van Dijk <roel@lambdacube.nl>
 maintainer:    Bas van Dijk <v.dijk.bas@gmail.com>
-               Roel van Dijk <vandijk.roel@gmail.com>
-copyright:     2011-2012 Bas van Dijk & Roel van Dijk
+               Roel van Dijk <roel@lambdacube.nl>
+copyright:     2011-2020 Bas van Dijk & Roel van Dijk
 license:       BSD3
 license-file:  LICENSE
 homepage:      https://github.com/basvandijk/unbounded-delays
