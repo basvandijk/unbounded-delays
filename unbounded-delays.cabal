@@ -1,6 +1,6 @@
 name:          unbounded-delays
 version:       0.1.1.1
-cabal-version: >= 1.6
+cabal-version: >= 1.10
 build-type:    Simple
 author:        Bas van Dijk <v.dijk.bas@gmail.com>
                Roel van Dijk <roel@lambdacube.nl>
