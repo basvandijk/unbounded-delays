@@ -22,7 +22,7 @@ extra-source-files: README.markdown
 
 source-repository head
   Type: git
-  Location: git://github.com/basvandijk/unbounded-delays.git
+  Location: https://github.com/basvandijk/unbounded-delays.git
 
 library
   default-language: Haskell98
